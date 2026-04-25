@@ -1,4 +1,4 @@
-import { Feather, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Image } from 'react-native';
 import {
@@ -14,8 +14,8 @@ const NICHES = [
   { icon: require("../../../assets/alibaker/health.png"), label: 'Health &\nFitness' },
   { icon: require("../../../assets/alibaker/paint.png"), label: 'Beauty &\nFashion' },
   { icon: require("../../../assets/alibaker/bevarage.png"), label: 'Food &\nBeverage' },
-  
-  { icon: require("../../../assets/alibaker/techno.png"), label: 'Gaming' },
+
+  { icon: require("../../../assets/alibaker/techno.png"), label: 'Technology & Gadgets' },
 ];
 
 const INFLUENCERS = [
@@ -27,41 +27,41 @@ const InfluencerCard = ({ item, star = false, verified = false }) => (
   <View style={styles.card}>
     {/* Avatar + name row */}
     <View style={styles.cardHeader}>
-      <View style={styles.avatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{width:"100%",height:"100%"}}/></View>
+      <View style={styles.avatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{ width: "100%", height: "100%" }} /></View>
       <View style={styles.cardInfo}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <Text style={styles.cardName}>{item.name}</Text>
-          {star && <Text style={{ fontSize: 14 }}>⭐</Text>}
-          {verified && <Text style={{ fontSize: 14, color: PRIMARY }}>✔</Text>}
-          {!star && !verified && <View style={styles.badgePurple}><Text style={styles.badgeStar}>✦</Text></View>}
+          {star && <Image source={require("../../../assets/alibaker/homecertf2.png")} style={{width:15,height:15}}/>}
+          {verified && <Image source={require("../../../assets/alibaker/homecertf3.png")} style={{width:15,height:15}}/>}
+          {!star && !verified && <Image source={require("../../../assets/alibaker/homecertf1.png")} style={{width:15,height:15}}/>}
         </View>
         <Text style={styles.cardHandle}>{item.handle}</Text>
       </View>
       <TouchableOpacity style={styles.heartBtn}>
-        <Text style={[styles.heartIcon, item.liked && { color: PRIMARY }]}>♥</Text>
+        <AntDesign name="heart" size={24} color="#6366F1" />
       </TouchableOpacity>
     </View>
 
     <Text style={styles.cardLocation}>{item.location}</Text>
 
     {/* Social icons */}
-    <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-    <View style={styles.socialRow}>
-      <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/Group.png")} style={{width:15,height:16,resizeMode:'contain'}}/></Text>
-      <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/music.png")} style={{width:15,height:16,resizeMode:'contain'}}/></Text>
-      <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/play.png")} style={{width:15,height:16,resizeMode:'contain'}}/></Text>
-      <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/sms.png")} style={{width:15,height:16,resizeMode:'contain'}}/></Text>
-      
-    </View>
-    <Text style={styles.statText}>☆ {item.rating}</Text>
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={styles.socialRow}>
+        <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/Group.png")} style={{ width: 15, height: 16, resizeMode: 'contain' }} /></Text>
+        <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/music.png")} style={{ width: 15, height: 16, resizeMode: 'contain' }} /></Text>
+        <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/play.png")} style={{ width: 15, height: 16, resizeMode: 'contain' }} /></Text>
+        <Text style={styles.socialChip}><Image source={require("../../../assets/alibaker/sms.png")} style={{ width: 15, height: 16, resizeMode: 'contain' }} /></Text>
+
+      </View>
+      <Text style={styles.statText}><Image source={require("../../../assets/alibaker/homestart.png")} style={{width:15,height:15}}/> {item.rating}</Text>
     </View>
 
-      <View style={styles.statRight}>
-        <Text style={styles.audienceLabel}>Audience <Text style={styles.audienceVal}>{item.audience}</Text></Text>
-        <Text style={styles.priceLabel}>Per Post <Text style={styles.priceVal}>{item.price}</Text></Text>
-      </View>
+    <View style={styles.statRight}>
+      <Text style={styles.audienceLabel}>Audience <Text style={styles.audienceVal}>{item.audience}</Text></Text>
+      <Text style={styles.priceLabel}>Per Post <Text style={styles.priceVal}>{item.price}</Text></Text>
     </View>
-  
+  </View>
+
 );
 
 const SectionHeader = ({ title }) => (
@@ -101,11 +101,11 @@ export default function HomeScreen({ navigation }: any) {
         <SectionHeader title="Niches" />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.nichesScroll} contentContainerStyle={{ paddingHorizontal: 16, gap: 10 }}>
           {NICHES.map((n, i) => (
-  <TouchableOpacity key={i} style={styles.nicheCard}>
-    <Image source={n.icon} style={styles.nicheIcon} />
-    <Text style={styles.nicheLabel}>{n.label}</Text>
-  </TouchableOpacity>
-))}
+            <TouchableOpacity key={i} style={styles.nicheCard}>
+              <Image source={n.icon} style={styles.nicheIcon} resizeMode='contain'/>
+              <Text style={styles.nicheLabel}>{n.label}</Text>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
 
         {/* Perfect Match */}
@@ -141,7 +141,7 @@ export default function HomeScreen({ navigation }: any) {
           { icon: '👤', label: 'Influencers' },
           { icon: '💬', label: 'Messages' },
           { icon: '💼', label: 'Campaigns' },
-          { icon: '⊞',  label: 'More' },
+          { icon: '⊞', label: 'More' },
         ].map((tab, i) => (
           <TouchableOpacity key={i} style={styles.tabItem}>
             <Text style={styles.tabIcon}>{tab.icon}</Text>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   logo: { fontSize: 24, fontWeight: '800', color: PRIMARY },
   topIcons: { flexDirection: 'row', gap: 8 },
-  iconBtn: { width: 38, height: 38,  alignItems: 'center', justifyContent: 'center' },
+  iconBtn: { width: 38, height: 38, alignItems: 'center', justifyContent: 'center' },
   iconTxt: { fontSize: 16 },
 
   // Search
@@ -187,13 +187,13 @@ const styles = StyleSheet.create({
   // Niches
   nichesScroll: { marginBottom: 24 },
   nicheCard: {
-    width: 80, borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 12,
-    padding: 10, alignItems: 'center', backgroundColor: '#fff',
-  },
- nicheIcon: {
-  width: 40,
-  height: 40,
+  width: 80, height: 90, borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 12,
+  padding: 10, alignItems: 'flex-start', justifyContent: 'space-between', backgroundColor: '#fff',
 },
+  nicheIcon: {
+    width: 32,
+    height: 32,
+  },
   nicheLabel: { fontSize: 11, color: '#555', textAlign: 'center', lineHeight: 15 },
 
   // Influencer card
@@ -215,10 +215,10 @@ const styles = StyleSheet.create({
   badgeStar: { color: '#fff', fontSize: 10 },
   cardLocation: { fontSize: 12, color: '#888', marginBottom: 8 },
   socialRow: { flexDirection: 'row', gap: 8, marginBottom: 10 },
-  socialChip: { fontSize: 16,marginTop:2 },
+  socialChip: { fontSize: 16, marginTop: 2 },
   statsRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   statText: { fontSize: 13, color: '#555', fontWeight: '600' },
-  statRight: { flexDirection: 'row', justifyContent:"space-between" },
+  statRight: { flexDirection: 'row', justifyContent: "space-between" },
   audienceLabel: { fontSize: 11, color: '#888' },
   audienceVal: { color: '#1A1A2E', fontWeight: '600' },
   priceLabel: { fontSize: 11, color: '#888' },

@@ -26,19 +26,19 @@ export default function InfluencerProfileCard() {
       {/* Social stats */}
       <View style={styles.socialRow}>
         <View style={styles.socialItem}>
-          <Text style={styles.igIcon}>📷</Text>
+          <Image source={require("../../../assets/alibaker/insta.png")} style={{width:24,height:24}}/>
           <Text style={styles.socialCount}>32.3K</Text>
         </View>
         <View style={styles.socialItem}>
-          <Text style={styles.ttIcon}>♪</Text>
+          <Image source={require("../../../assets/alibaker/tiktok.png")} style={{width:24,height:24}}/>
           <Text style={styles.socialCount}>32.3K</Text>
         </View>
         <View style={styles.socialItem}>
-          <Text style={styles.ytIcon}>▶</Text>
+          <Image source={require("../../../assets/alibaker/youtube.png")} style={{width:24,height:24}}/>
           <Text style={styles.socialCount}>148K</Text>
         </View>
         <View style={styles.socialItem}>
-          <Text style={styles.twIcon}>💬</Text>
+          <Image source={require("../../../assets/alibaker/msg.png")} style={{width:24,height:24}}/>
           <Text style={styles.socialCount}>2.1M</Text>
         </View>
       </View>

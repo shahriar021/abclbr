@@ -1,3 +1,4 @@
+import { AntDesign } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
@@ -48,7 +49,7 @@ export default function CampaignScreen({ navigation }: any) {
       {/* Filters */}
       <View style={styles.filterRow}>
         <TouchableOpacity style={styles.filterIconBtn}>
-          <Text style={styles.filterIconTxt}>⚙</Text>
+          <Image source={require("../../../assets/alibaker/orderAll.png")} style={{ width: 24, height: 24 }} />
         </TouchableOpacity>
         {['Niche Tag', 'Budget'].map((f) => (
           <TouchableOpacity
@@ -57,7 +58,7 @@ export default function CampaignScreen({ navigation }: any) {
             onPress={() => setActiveFilter(f === activeFilter ? '' : f)}
           >
             <Text style={[styles.filterChipTxt, activeFilter === f && { color: PRIMARY }]}>{f}</Text>
-            <Text style={styles.filterArrow}>▾</Text>
+            <AntDesign name="down" size={7} color="black" />
           </TouchableOpacity>
         ))}
       </View>
@@ -73,7 +74,7 @@ export default function CampaignScreen({ navigation }: any) {
           >
             {/* Image area */}
             <View style={[styles.cardImage, { backgroundColor: item.bg }]}>
-              <Image source={require("../../../assets/alibaker/img.png")} style={{width:"100%",height:"100%"}}/>
+              <Image source={require("../../../assets/alibaker/img.png")} style={{ width: "100%", height: "100%" }} />
               <View style={[styles.statusBadge, { backgroundColor: item.statusColor }]}>
                 <Text style={styles.statusTxt}>{item.status}</Text>
               </View>
@@ -102,9 +103,9 @@ export default function CampaignScreen({ navigation }: any) {
       </ScrollView>
 
       {/* FAB */}
-      {/* <TouchableOpacity style={styles.fab}>
-        <Text style={styles.fabTxt}>+</Text>
-      </TouchableOpacity> */}
+      <TouchableOpacity style={styles.fab} onPress={() => navigation?.navigate('CreateCampaignScreen')}>
+  <Text style={styles.fabTxt}>+</Text>
+</TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
 
   filterRow: { flexDirection: 'row', gap: 8, paddingHorizontal: 16, marginBottom: 8, alignItems: 'center' },
   filterIconBtn: {
-    width: 36, height: 36, borderRadius: 8,
+    width: 36, height: 36, borderRadius: 50,
     borderWidth: 1.5, borderColor: '#E8E8F0', alignItems: 'center', justifyContent: 'center',
   },
   filterIconTxt: { fontSize: 16, color: '#555' },

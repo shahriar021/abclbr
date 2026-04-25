@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
   StatusBar, ScrollView,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -44,7 +45,7 @@ export default function CampaignDetailsScreen({ navigation, route }: any) {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Campaign Details</Text>
               <TouchableOpacity style={styles.editBtn}>
-                <Text style={styles.editTxt}>✎  Edit</Text>
+                 <Image source={require("../../../assets/alibaker/editpan.png")} style={{width:15,height:15}} resizeMode='contain'/><Text style={styles.editTxt}>  Edit</Text>
               </TouchableOpacity>
             </View>
 
@@ -72,7 +73,7 @@ export default function CampaignDetailsScreen({ navigation, route }: any) {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Budget & Timeline</Text>
               <TouchableOpacity style={styles.editBtn}>
-                <Text style={styles.editTxt}>✎  Edit</Text>
+                 <Image source={require("../../../assets/alibaker/editpan.png")} style={{width:15,height:15}} resizeMode='contain'/><Text style={styles.editTxt}>  Edit</Text>
               </TouchableOpacity>
             </View>
 
@@ -105,7 +106,7 @@ export default function CampaignDetailsScreen({ navigation, route }: any) {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Content Details</Text>
               <TouchableOpacity style={styles.editBtn}>
-                <Text style={styles.editTxt}>✎  Edit</Text>
+                 <Image source={require("../../../assets/alibaker/editpan.png")} style={{width:15,height:15}} resizeMode='contain'/><Text style={styles.editTxt}> Edit</Text>
               </TouchableOpacity>
             </View>
 
@@ -138,10 +139,10 @@ export default function CampaignDetailsScreen({ navigation, route }: any) {
           <Text style={{fontSize:15,color:"white",textAlign:"center",padding:10}}>Apply Now</Text>
         </TouchableOpacity></View> :<View style={styles.footer}>
         <TouchableOpacity style={styles.inactiveBtn}>
-          <Text style={styles.inactiveTxt}>⊘  Inactive</Text>
+          <Image source={require("../../../assets/alibaker/inactiveCamp.png")} style={{width:24,height:24}} resizeMode='contain'/><Text style={styles.inactiveTxt}>  Inactive</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sendBtn}>
-          <Text style={styles.sendTxt}>↗  Send Offer</Text>
+          <Image source={require("../../../assets/alibaker/sendCamp.png")} style={{width:24,height:24}} resizeMode='contain'/><Text style={styles.sendTxt}> Send Offer</Text>
         </TouchableOpacity>
       </View>}
     </SafeAreaView>
@@ -199,13 +200,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', borderTopWidth: 1, borderTopColor: '#F0F0F0',
   },
   inactiveBtn: {
-    flex: 1, backgroundColor: '#E53935', borderRadius: 30,
-    paddingVertical: 14, alignItems: 'center',
+    flex: 1,flexDirection:"row",gap:5, backgroundColor: '#EF4444', borderRadius: 30,
+    paddingVertical: 14, alignItems: 'center',justifyContent:"center"
   },
   inactiveTxt: { color: '#fff', fontSize: 15, fontWeight: '600' },
   sendBtn: {
-    flex: 1, backgroundColor: PRIMARY, borderRadius: 30,
-    paddingVertical: 14, alignItems: 'center',
+    flex: 1,flexDirection:"row",gap:5, backgroundColor: PRIMARY, borderRadius: 30,
+    paddingVertical: 14, alignItems: 'center',justifyContent:"center"
   },
   sendTxt: { color: '#fff', fontSize: 15, fontWeight: '600' },
 });

@@ -17,6 +17,8 @@ import OrderDetailsScreen from "../screens/Orders/OrderDetailsScreen";
 import MyReviewsScreen from "../screens/More/Review";
 import BadgeScreen from "../screens/More/Badges";
 import OrdersScreen from "../screens/Orders/OrderNextPage";
+import { WithdrawBalanceScreen } from "../screens/Earnings/WithdrawBalance";
+import CreateCampaignScreen from "../screens/campaign/CreateCampaign";
 
 
 const Stack = createNativeStackNavigator();
@@ -70,6 +72,8 @@ const StackNavigation = () => {
       <Stack.Screen options={{ headerShown: false }} name="BadgeScreen" component={BadgeScreen} />
       <Stack.Screen options={{ headerShown: false }} name="CampaignDetails Screen" component={CampaignDetailsScreen} />
       <Stack.Screen options={{ headerShown: false }} name="OrderNext Screen" component={OrdersScreen} />
+      <Stack.Screen options={{ headerShown: false }} name="WithdrawBalance Screen" component={WithdrawBalanceScreen} />
+      <Stack.Screen options={{ headerShown: false }} name="CreateCampaignScreen" component={CreateCampaignScreen} />
 
 
       {/*  */}

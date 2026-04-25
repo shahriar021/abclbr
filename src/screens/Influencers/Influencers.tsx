@@ -1,4 +1,4 @@
-import { Feather } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
@@ -18,6 +18,13 @@ const INFLUENCERS = [
   { name: 'Sara Afrin', handle: '@sana_irfan043', location: 'Dhaka, Bangladesh', rating: 4.8, audience: 'Macro', price: '$120-150', badge: 'shield', liked: false },
 ];
 
+const FILTERS = [
+  { label: 'All', icon: require('../../../assets/alibaker/orderAll.png') },
+  { label: 'Primary Niche', icon: require('../../../assets/alibaker/orderRating.png') },
+  { label: 'Budget', icon: require('../../../assets/alibaker/OrderDOllar.png') },
+  { label: 'Ratings ', icon: require('../../../assets/alibaker/orderFav.png') },
+];
+
 const SOCIAL_ICONS = [
   require("../../../assets/alibaker/Group.png"),
   require("../../../assets/alibaker/music.png"),
@@ -26,9 +33,9 @@ const SOCIAL_ICONS = [
 ];
 
 const BadgeIcon = ({ type }: { type: string }) => {
-  if (type === 'verified') return <View style={[styles.badge, { backgroundColor: '#4A90D9' }]}><Text style={styles.badgeTxt}>✔</Text></View>;
-  if (type === 'shield')   return <View style={[styles.badge, { backgroundColor: '#8E8E8E' }]}><Text style={styles.badgeTxt}>🛡</Text></View>;
-  if (type === 'star')     return <View style={[styles.badge, { backgroundColor: PRIMARY }]}><Text style={styles.badgeTxt}>✦</Text></View>;
+  if (type === 'verified') return <Image source={require("../../../assets/alibaker/homecertf2.png")} style={{ width: 15, height: 15 }} />;
+  if (type === 'shield') return <Image source={require("../../../assets/alibaker/homecertf3.png")} style={{ width: 15, height: 15 }} />;
+  if (type === 'star') return <Image source={require("../../../assets/alibaker/homecertf1.png")} style={{ width: 15, height: 15 }} />;
   return null;
 };
 
@@ -37,7 +44,7 @@ const InfluencerCard = ({ item }: { item: any }) => {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <View style={styles.avatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{width:"100%",height:"100%"}}/></View>
+        <View style={styles.avatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{ width: "100%", height: "100%" }} /></View>
         <View style={styles.cardInfo}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
             <Text style={styles.cardName}>{item.name}</Text>
@@ -46,20 +53,20 @@ const InfluencerCard = ({ item }: { item: any }) => {
           <Text style={styles.cardHandle}>{item.handle}</Text>
         </View>
         <TouchableOpacity onPress={() => setLiked(!liked)}>
-          <Text style={[styles.heartIcon, liked && { color: PRIMARY }]}>♥</Text>
+          <AntDesign name="heart" size={24} color="#6366F1" />
         </TouchableOpacity>
       </View>
 
       <Text style={styles.cardLocation}>{item.location}</Text>
 
-     <View style={styles.socialRow}>
-  {SOCIAL_ICONS.map((src, i) => (
-    <Text key={i} style={styles.socialChip}>
-      <Image source={src} style={{ width: 15, height: 16, resizeMode: 'contain' }} />
-    </Text>
-  ))}
-  <Text style={styles.ratingRight}>☆ {item.rating}</Text>
-</View>
+      <View style={styles.socialRow}>
+        {SOCIAL_ICONS.map((src, i) => (
+          <Text key={i} style={styles.socialChip}>
+            <Image source={src} style={{ width: 15, height: 16, resizeMode: 'contain' }} />
+          </Text>
+        ))}
+        <Text style={styles.ratingRight}><Image source={require("../../../assets/alibaker/homestart.png")} style={{ width: 15, height: 15 }} /> {item.rating}</Text>
+      </View>
 
       <View style={styles.statsRow}>
         <Text style={styles.audienceLabel}>Audience <Text style={styles.audienceVal}>{item.audience}</Text></Text>
@@ -89,24 +96,21 @@ export default function InfluencerDirectoryScreen({ navigation }: any) {
         style={styles.filterScroll}
         contentContainerStyle={styles.filterContent}
       >
-        <TouchableOpacity style={styles.filterIconBtn}>
-          <Text style={styles.filterIconTxt}>⚙</Text>
-        </TouchableOpacity>
-        {['Primary Niche', 'Budget', 'Rating'].map((f) => (
+        {FILTERS.map((f) => (
           <TouchableOpacity
-            key={f}
-            style={[styles.filterChip, activeFilter === f && styles.filterChipActive]}
-            onPress={() => setActiveFilter(f === activeFilter ? '' : f)}
+            key={f.label}
+            style={[styles.filterChip, activeFilter === f.label && styles.filterChipActive]}
+            onPress={() => setActiveFilter(f.label === activeFilter ? '' : f.label)}
           >
-            <Text style={[styles.filterChipTxt, activeFilter === f && { color: PRIMARY }]}>{f}</Text>
-            <Text style={[styles.filterChipArrow, activeFilter === f && { color: PRIMARY }]}>▾</Text>
+            <Image source={f.icon} style={{ width: 20, height: 20 }} resizeMode="contain" />
+            <Text style={[styles.filterChipTxt, activeFilter === f.label && { color: PRIMARY }]}>{f.label}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
 
       {/* Search */}
       <View style={styles.searchWrapper}>
-       <Feather name="search" size={24} color="black" />
+        <Feather name="search" size={24} color="black" />
         <TextInput
           style={styles.searchInput}
           placeholder="Search by influencer, category or tag"
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
   header: { paddingHorizontal: 16, paddingVertical: 14, alignItems: 'center' },
   headerTitle: { fontSize: 20, fontWeight: '700', color: '#1A1A2E' },
 
-  filterScroll: { maxHeight: 50 },
+  filterScroll: { paddingVertical: 4 },
   filterContent: { paddingHorizontal: 16, gap: 8, alignItems: 'center' },
   filterIconBtn: {
     width: 38, height: 38, borderRadius: 10,
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
   filterIconTxt: { fontSize: 16, color: '#555' },
   filterChip: {
     flexDirection: 'row', alignItems: 'center', gap: 4,
-    paddingHorizontal: 14, paddingVertical: 8,
+    paddingHorizontal: 14, paddingVertical: 6,
     borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 20,
     backgroundColor: '#fff',
   },

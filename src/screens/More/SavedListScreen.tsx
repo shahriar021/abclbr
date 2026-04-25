@@ -1,5 +1,7 @@
+import { AntDesign } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, ScrollView, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PRIMARY = '#6C63FF';
 
@@ -26,17 +28,16 @@ export default function SavedListScreen({ navigation }: any) {
         {DATA.map((item, i) => (
           <View key={i} style={styles.card}>
             <View style={styles.cardTop}>
-              <View style={styles.avatar} />
+              <Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{width:55,height:55}}/>
               <View style={styles.info}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.tags}>{item.tags}</Text>
                 <Text style={styles.location}>{item.location}</Text>
               </View>
               <TouchableOpacity onPress={() => setSaved(s => s.map((v, idx) => idx === i ? !v : v))}>
-                <Text style={[styles.heart, { color: saved[i] ? PRIMARY : '#ddd' }]}>♥</Text>
+                <AntDesign name="heart" size={24} color="#6366F1" />
               </TouchableOpacity>
             </View>
-            <View style={styles.divider} />
             <View style={styles.cardBottom}>
               <Text style={styles.audienceTxt}>Audience <Text style={styles.audienceVal}>{item.audience}</Text></Text>
               <Text style={styles.priceTxt}>Per Post <Text style={styles.priceVal}>{item.price}</Text></Text>
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   location: { fontSize: 12, color: '#888' },
   heart: { fontSize: 22 },
   divider: { height: 1, backgroundColor: '#F5F5F5', marginVertical: 10 },
-  cardBottom: { flexDirection: 'row', justifyContent: 'space-between' },
+  cardBottom: {marginTop:10, flexDirection: 'row', justifyContent: 'space-between' },
   audienceTxt: { fontSize: 12, color: '#888' },
   audienceVal: { color: '#1A1A2E', fontWeight: '600' },
   priceTxt: { fontSize: 12, color: '#888' },

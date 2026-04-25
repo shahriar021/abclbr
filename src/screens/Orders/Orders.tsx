@@ -18,10 +18,10 @@ const ORDERS = [
 ];
 
 const FILTERS = [
-  { icon: '⚙', label: 'All' },
-  { icon: '☆', label: 'Ratings 4.0+' },
-  { icon: '$', label: 'Budget' },
-  { icon: '♡', label: 'Favo...' },
+  { label: 'All', icon: require('../../../assets/alibaker/orderAll.png') },
+  { label: 'Ratings 4.0+', icon: require('../../../assets/alibaker/orderRating.png') },
+  { label: 'Budget', icon: require('../../../assets/alibaker/OrderDOllar.png') },
+  { label: 'Favo...', icon: require('../../../assets/alibaker/orderFav.png') },
 ];
 
 export default function OrdersScreen({ navigation }: any) {
@@ -51,7 +51,7 @@ export default function OrdersScreen({ navigation }: any) {
             onPress={() => setActiveFilter(f.label)}
             activeOpacity={0.8}
           >
-            <Text style={[styles.filterIcon, activeFilter === f.label && { color: PRIMARY }]}>{f.icon}</Text>
+            <Image source={f.icon} style={{ height: 14, width: 14 }} resizeMode={'contain'}/>
             <Text style={[styles.filterTxt, activeFilter === f.label && { color: PRIMARY, fontWeight: '600' }]}>{f.label}</Text>
           </TouchableOpacity>
         ))}
@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
   header: { paddingHorizontal: 16, paddingVertical: 14, alignItems: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700', color: '#1A1A2E' },
 
-  filterScroll: { maxHeight: 48, marginBottom: 8 },
-  filterContent: { paddingHorizontal: 16, gap: 8, alignItems: 'center' },
+ filterScroll: { marginBottom: 8 },
+filterContent: { paddingHorizontal: 16, gap: 8, alignItems: 'center' },
   filterChip: {
-    flexDirection: 'row', alignItems: 'center', gap: 5,
-    paddingHorizontal: 14, paddingVertical: 8,
-    borderRadius: 20, borderWidth: 1.5, borderColor: '#E8E8F0', backgroundColor: '#fff',
-  },
+  flexDirection: 'row', alignItems: 'center', gap: 5,
+  paddingHorizontal: 14, paddingVertical: 6,  // reduced from 8
+  borderRadius: 20, borderWidth: 1.5, borderColor: '#E8E8F0', backgroundColor: '#fff',
+},
   filterChipActive: { borderColor: PRIMARY, backgroundColor: PRIMARY + '11' },
   filterIcon: { fontSize: 13, color: '#888' },
   filterTxt: { fontSize: 13, color: '#555' },

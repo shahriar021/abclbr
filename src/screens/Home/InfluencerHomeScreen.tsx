@@ -46,9 +46,7 @@ export default function InfluencerHomeScreen({ navigation }: any) {
               <Text style={styles.verifiedTitle}>Verified</Text>
               <Text style={styles.verifiedSub}>Badge</Text>
             </View>
-            <View style={styles.verifiedBadge}>
-              <Text style={styles.verifiedCheck}>✔</Text>
-            </View>
+            <Image source={require("../../../assets/alibaker/verifiedBadge.png")} style={{width:30,height:30}}/>
           </View>
 
           {/* Fraud + Rating row */}
@@ -60,7 +58,7 @@ export default function InfluencerHomeScreen({ navigation }: any) {
             <View style={styles.halfCard}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                 <Text style={styles.halfVal}>4.8/5</Text>
-                <Text style={{ color: '#FFC107', fontSize: 16 }}>★</Text>
+                <Text style={{ color: '#6366F1', fontSize: 26 }}>★</Text>
               </View>
               <Text style={styles.halfLabel}>Rating</Text>
             </View>
@@ -159,7 +157,7 @@ const styles = StyleSheet.create({
   halfCard: {
     flex: 1, borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 14, padding: 16,
   },
-  halfVal: { fontSize: 18, fontWeight: '800', color: '#1A1A2E', marginBottom: 4 },
+  halfVal: { fontSize: 26, fontWeight: '800', color: '#1A1A2E', marginBottom: 4 },
   halfLabel: { fontSize: 12, color: '#888' },
 
   sectionHeader: {

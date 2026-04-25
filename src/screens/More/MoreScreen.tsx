@@ -8,7 +8,7 @@ import InfluencerProfileCard from './InfluenceProfileCard';
 
 const PRIMARY = '#6C63FF';
 
-const Section = ({ title, items, navigation, routes }: any) => (
+const Section = ({ title, items,icons, navigation, routes }: any) => (
   <View style={styles.section}>
     <Text style={styles.sectionLabel}>{title}</Text>
     <View style={styles.card}>
@@ -19,6 +19,7 @@ const Section = ({ title, items, navigation, routes }: any) => (
           onPress={() => navigation?.navigate(routes[i])}
           activeOpacity={0.7}
         >
+          <Image source={icons[i]} style={{ width: 22, height: 22 }} resizeMode="contain" />
           <Text style={styles.rowTxt}>{item}</Text>
           <Text style={styles.arrow}>›</Text>
         </TouchableOpacity>
@@ -29,9 +30,9 @@ const Section = ({ title, items, navigation, routes }: any) => (
 
 export default function MoreScreen({ navigation }: any) {
   const dispatch = useAppDispatch()
-  const userType = useAppSelector((state)=>state.auth.userType)
+  const userType = useAppSelector((state) => state.auth.userType)
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     dispatch(setToken(0))
   }
   return (
@@ -41,8 +42,8 @@ export default function MoreScreen({ navigation }: any) {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ padding: 16, paddingBottom: 100, gap: 20 }}>
 
         {/* Profile banner */}
-       {userType=="brand"&& <TouchableOpacity style={styles.profileBanner} activeOpacity={0.85}>
-          <View style={styles.profileAvatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{width:"100%",height:"100%",borderRadius:50}}/></View>
+        {userType == "brand" && <TouchableOpacity style={styles.profileBanner} activeOpacity={0.85}>
+          <View style={styles.profileAvatar} ><Image source={require("../../../assets/alibaker/ProfileImage.png")} style={{ width: "100%", height: "100%", borderRadius: 50 }} /></View>
           <View style={{ flex: 1 }}>
             <Text style={styles.profileName}>Imran Mahmud Siddiq</Text>
             <View style={styles.freeBadge}><Text style={styles.freeTxt}>Free</Text></View>
@@ -51,28 +52,48 @@ export default function MoreScreen({ navigation }: any) {
         </TouchableOpacity>}
 
 
-        {userType=="influencer"&&<InfluencerProfileCard/>}
+        {userType == "influencer" && <InfluencerProfileCard />}
 
         <Section
           title="More Tools"
-          items={['Analytics', 'Subscription', 'Payment & Billing', 'Saved List', 'Account Settings','Badge','Order']}
-          routes={['AnalyticsScreen', 'SubscriptionScreen', 'PaymentBillingScreen', 'SavedListScreen', 'AccountSettingsScreen','BadgeScreen','OrdersScreen']}
+          items={['Analytics', 'Subscription', 'Payment & Billing', 'Saved List', 'Account Settings', 'Badge', 'Order']}
+          routes={['AnalyticsScreen', 'SubscriptionScreen', 'PaymentBillingScreen', 'SavedListScreen', 'AccountSettingsScreen', 'BadgeScreen', 'OrdersScreen']}
+          icons={[
+            require('../../../assets/alibaker/analytics.png'),
+            require('../../../assets/alibaker/subscription.png'),
+            require('../../../assets/alibaker/paymentAndbelling.png'),
+            require('../../../assets/alibaker/savedList.png'),
+            require('../../../assets/alibaker/accSetting.png'),
+            require('../../../assets/alibaker/order.png'),
+            require('../../../assets/alibaker/order.png'),
+          ]}
           navigation={navigation}
         />
         <Section
           title="More Info & Support"
           items={['Help & Support', 'About Us', 'Rate this App']}
           routes={['HelpSupport', 'AboutUs', 'MyReviewsScreen']}
+          icons={[
+            require('../../../assets/alibaker/hlpSup.png'),
+            require('../../../assets/alibaker/aboutus.png'),
+            require('../../../assets/alibaker/rate.png'),
+            
+          ]}
           navigation={navigation}
         />
         <Section
           title="Others"
           items={['Privacy Policy', 'Terms & Conditions']}
           routes={['PrivacyPolicy', 'TermsConditions']}
+          icons={[
+            require('../../../assets/alibaker/priv.png'),
+            require('../../../assets/alibaker/priv.png'),
+           
+          ]}
           navigation={navigation}
         />
-        <TouchableOpacity style={{padding:10,alignItems:"center"}} onPress={handleLogout}>
-          <Text style={{fontWeight:"bold",color:"red"}}>
+        <TouchableOpacity style={{ padding: 10, alignItems: "center" }} onPress={handleLogout}>
+          <Text style={{ fontWeight: "bold", color: "red" }}>
             Log out
           </Text>
         </TouchableOpacity>
@@ -101,6 +122,6 @@ const styles = StyleSheet.create({
   card: { backgroundColor: '#fff', borderRadius: 14, overflow: 'hidden' },
   row: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 16 },
   rowBorder: { borderBottomWidth: 1, borderBottomColor: '#F5F5F5' },
-  rowTxt: { flex: 1, fontSize: 15, color: '#1A1A2E' },
+  rowTxt: { flex: 1, fontSize: 15, color: '#1A1A2E',marginLeft:5 },
   arrow: { fontSize: 20, color: '#C0C0C0' },
 });

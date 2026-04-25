@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
   StatusBar, ScrollView, TextInput,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -28,7 +29,8 @@ const HISTORY = [
     amount: '$754',
     iconBg: '#FDE8E8',
     iconColor: '#E53935',
-    iconSymbol: '↑',
+    iconSymbol: require('../../../assets/alibaker/earningRed.png'),
+    bgColor:"#FFF7F6"
   },
   {
     date: '25 Aug 2025, 11:53 PM',
@@ -39,7 +41,8 @@ const HISTORY = [
     amount: '$754',
     iconBg: '#E8F5E9',
     iconColor: '#4CAF50',
-    iconSymbol: '↓',
+    iconSymbol: require('../../../assets/alibaker/earningGreen.png'),
+    bgColor:"#F3FCF4"
   },
 ];
 
@@ -54,11 +57,11 @@ export function EarningsWithdrawalsScreen({ navigation }: any) {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Earnings & Withdrawals</Text>
         <TouchableOpacity style={styles.infoBtn}>
-          <Text style={styles.infoTxt}>ℹ</Text>
+          <Image source={require("../../../assets/alibaker/earningI.png")} style={{width:20,height:20}}/>
         </TouchableOpacity>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
+      <ScrollView  style={{ flex: 1 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 140 }}>
 
         {/* Balance */}
         <View style={styles.balanceSection}>
@@ -89,14 +92,12 @@ export function EarningsWithdrawalsScreen({ navigation }: any) {
             <View key={i} style={[styles.historyCard, i < HISTORY.length - 1 && { marginBottom: 12 }]}>
               <View style={styles.historyTop}>
                 <Text style={styles.historyDate}>{h.date}</Text>
-                <View style={[styles.historyIcon, { backgroundColor: h.iconBg, borderWidth: 1.5, borderColor: h.iconColor }]}>
-                  <Text style={[styles.historyIconTxt, { color: h.iconColor }]}>{h.iconSymbol}</Text>
-                </View>
+                <Image source={h.iconSymbol} style={{width:32,height:32}}/>
               </View>
               <Text style={styles.historyId}>Order ID: {h.orderId}</Text>
               <Text style={styles.historyId}>Transaction ID: {h.txId}</Text>
               <View style={styles.historyBottom}>
-                <Text style={[styles.historyType, { color: h.typeColor }]}>{h.type}</Text>
+                <Text style={[styles.historyType, { color: h.typeColor,backgroundColor:h.bgColor,padding:5,borderRadius:10 }]}>{h.type}</Text>
                 <View style={styles.amtBadge}>
                   <Text style={styles.amtTxt}>{h.amount}</Text>
                 </View>
@@ -104,90 +105,28 @@ export function EarningsWithdrawalsScreen({ navigation }: any) {
             </View>
           ))}
         </View>
-      </ScrollView>
-
-      {/* Footer buttons */}
-      <View style={styles.footer}>
+        <View style={styles.footer}>
         <TouchableOpacity style={styles.outlineBtn}>
           <Text style={styles.outlineTxt}>Purchase Subscription</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.primaryBtn}
-          onPress={() => navigation?.navigate('WithdrawBalance')}
+          onPress={() => navigation?.navigate('WithdrawBalance Screen')}
         >
           <Text style={styles.primaryTxt}>Withdraw Balance</Text>
         </TouchableOpacity>
       </View>
+      </ScrollView>
+
+      {/* Footer buttons */}
+      
     </SafeAreaView>
   );
 }
 
 // ─── Withdraw Balance ─────────────────────────────────────────────────────────
 
-export function WithdrawBalanceScreen({ navigation }: any) {
-  const [amount, setAmount] = useState('');
 
-  return (
-    <SafeAreaView style={styles.safe}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation?.goBack()} style={styles.backBtn}>
-          <Text style={styles.backArrow}>‹</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Withdraw Balance</Text>
-        <TouchableOpacity style={styles.infoBtn}>
-          <Text style={styles.infoTxt}>ℹ</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.wbBody}>
-        {/* Amount row */}
-        <View style={styles.amountRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.fieldLabel}>Withdraw Amount</Text>
-            <View style={styles.inputWrapper}>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter amount"
-                placeholderTextColor="#bbb"
-                value={amount}
-                onChangeText={setAmount}
-                keyboardType="numeric"
-              />
-            </View>
-          </View>
-          <View style={{ width: 12 }} />
-          <View style={{ flex: 1 }}>
-            <Text style={styles.fieldLabel}>Rest Amount</Text>
-            <View style={[styles.inputWrapper, { backgroundColor: '#F0F0F0' }]}>
-              <Text style={styles.restAmt}>$566</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Transfer via */}
-        <Text style={styles.fieldLabel}>Transfer Via</Text>
-        <View style={styles.stripeRow}>
-          <View style={styles.radioSelected} />
-          <Text style={styles.stripeTxt}>stripe</Text>
-        </View>
-
-        {/* Warning */}
-        <View style={styles.warningBox}>
-          <Text style={styles.warningIcon}>⚠</Text>
-          <Text style={styles.warningTxt}>Minimum withdraw amount  <Text style={{ fontWeight: '700' }}>$50</Text></Text>
-        </View>
-      </View>
-
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.primaryBtn}>
-          <Text style={styles.primaryTxt}>Confirm Withdraw</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
-}
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
@@ -201,8 +140,7 @@ const styles = StyleSheet.create({
   backArrow: { fontSize: 28, color: '#1A1A2E', marginTop: -2 },
   headerTitle: { fontSize: 17, fontWeight: '700', color: '#1A1A2E' },
   infoBtn: {
-    width: 34, height: 34, borderRadius: 17,
-    borderWidth: 1.5, borderColor: '#D0D0D0', alignItems: 'center', justifyContent: 'center',
+    width: 34, height: 34,  alignItems: 'center', justifyContent: 'center',
   },
   infoTxt: { fontSize: 16, color: '#888' },
 
@@ -242,7 +180,13 @@ const styles = StyleSheet.create({
   },
   amtTxt: { fontSize: 13, color: PRIMARY, fontWeight: '700' },
 
-  footer: { position: 'absolute', bottom: 5, left: 0, right: 0, padding: 16, paddingBottom: 28, backgroundColor: '#fff', gap: 10 },
+  footer: { 
+  padding: 16,
+  paddingBottom: 34,
+  backgroundColor: '#fff',
+  gap: 10,
+}
+,
   outlineBtn: {
     borderWidth: 1.5, borderColor: '#E0E0E0', borderRadius: 30,
     paddingVertical: 14, alignItems: 'center',
@@ -252,29 +196,5 @@ const styles = StyleSheet.create({
   primaryTxt: { color: '#fff', fontSize: 16, fontWeight: '600' },
 
   // Withdraw Balance
-  wbBody: { flex: 1, paddingHorizontal: 16, paddingTop: 8 },
-  amountRow: { flexDirection: 'row', marginBottom: 20 },
-  fieldLabel: { fontSize: 14, fontWeight: '600', color: '#1A1A2E', marginBottom: 8 },
-  inputWrapper: {
-    borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 10,
-    backgroundColor: '#FAFAFA', height: 48, justifyContent: 'center',
-  },
-  input: { paddingHorizontal: 14, fontSize: 14, color: '#1A1A2E' },
-  restAmt: { paddingHorizontal: 14, fontSize: 15, color: '#1A1A2E', fontWeight: '600' },
-  stripeRow: {
-    flexDirection: 'row', alignItems: 'center', gap: 12,
-    borderWidth: 1.5, borderColor: '#E8E8F0', borderRadius: 12,
-    padding: 14, marginBottom: 16,
-  },
-  radioSelected: {
-    width: 20, height: 20, borderRadius: 10,
-    borderWidth: 6, borderColor: PRIMARY,
-  },
-  stripeTxt: { fontSize: 18, fontWeight: '800', color: PRIMARY, letterSpacing: 0.5 },
-  warningBox: {
-    flexDirection: 'row', alignItems: 'center', gap: 10,
-    backgroundColor: '#FFF8E8', borderRadius: 10, padding: 14,
-  },
-  warningIcon: { fontSize: 18, color: '#FFA000' },
-  warningTxt: { fontSize: 13, color: '#888' },
+ 
 });
